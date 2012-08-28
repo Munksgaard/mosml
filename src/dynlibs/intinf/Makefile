@@ -10,7 +10,7 @@ GMPDIR=${HOME}/c/gmp-2.0.2
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR) -I ${GMPDIR}
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR)
 
 MOSMLTOOLS=camlrunm $(MOSMLHOME)/tools
 MOSMLC=mosmlc -c

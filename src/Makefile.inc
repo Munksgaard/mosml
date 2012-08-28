@@ -2,7 +2,7 @@
 
 # Where to install stuff
 
-MOSMLHOME=${HOME}/projects/mosml2.10
+MOSMLHOME=${HOME}/.local/share/mosml/
 
 # Various utility programs
 INSTALL_PROGRAM=cp
@@ -29,10 +29,10 @@ ADDDYNLIBCFLAGS=
 
 # For Linux (x86 or Alpha), use:
 # ------------------------------
-#CPP=cpp -P -traditional -Dunix -Umsdos
-#STRIP=strip -S
-#LD=gcc -rdynamic
-#DYNLD=ld -shared
+CPP=cpp -P -traditional -Dunix -Umsdos
+STRIP=strip -S
+LD=gcc -rdynamic
+DYNLD=ld -shared
 
 # For FreeBSD, use:
 # -----------------

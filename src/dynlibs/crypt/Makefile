@@ -3,7 +3,7 @@
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR)
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR)
 BASELIBS=-lm -ldl
 
 all: libcrypt.so 

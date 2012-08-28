@@ -21,7 +21,7 @@ PGSQLINCDIR=/usr/include/postgresql
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR) -I ${PGSQLINCDIR}
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR) -I ${PGSQLINCDIR}
 
 MOSMLTOOLS=camlrunm $(MOSMLHOME)/tools
 MOSMLC=mosmlc -c
@@ -36,7 +36,7 @@ mpq.o: mpq.c
 
 libmpq.so: mpq.o
 # Some recent Linux distributions need this:
-	$(DYNLD) -lcrypt -o libmpq.so mpq.o ${PGSQLLIBDIR}/libpq.a
+	$(DYNLD) -lcrypt -o libmpq.so mpq.o -L${PGSQLLIBDIR} -lpq	
 #	$(DYNLD) -o libmpq.so mpq.o ${PGSQLLIBDIR}/libpq.a
 
 install:

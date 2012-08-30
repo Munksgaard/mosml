@@ -2,7 +2,8 @@
 
 # Where to install stuff
 
-MOSMLHOME=${HOME}/.local/share/mosml/
+MOSMLHOME=/usr/local/share/mosml/
+LNBINDIR=/usr/local/bin/
 
 # Various utility programs
 INSTALL_PROGRAM=cp

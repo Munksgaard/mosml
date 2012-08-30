@@ -50,6 +50,7 @@ install:
 	test -d $(INCDIR) || mkdir -p $(INCDIR)
 	test -d $(DOCDIR) || mkdir -p $(DOCDIR)
 	test -d $(TOOLDIR) || mkdir -p $(TOOLDIR)
+	test -d $(LNBINDIR) || mkdir -p $(LNBINDIR)
 	cd runtime; make install
 	cd config; make install
 	cd launch; make all install
@@ -60,6 +61,11 @@ install:
 	cd lex; make install
 	(cd $(INCDIR)/..; rm -fr config; ln -s include config)
 	cd doc; make install
+	ln -s $(BINDIR)/camlrunm $(LNBINDIR)
+	ln -s $(BINDIR)/mosml $(LNBINDIR)
+	ln -s $(BINDIR)/mosmlc $(LNBINDIR)
+	ln -s $(BINDIR)/mosmllex $(LNBINDIR)
+	ln -s $(BINDIR)/mosmlyac $(LNBINDIR)
 
 # Remove all generated files
 clean:

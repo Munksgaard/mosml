@@ -2,7 +2,7 @@
 # Requires Dynlib
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I../../../runtime
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I../../../runtime
 BASELIBS=-lm -ldl
 
 include ../../../Makefile.inc

@@ -1,8 +1,8 @@
-# Unix configuration Makefile for Moscow ML
+# Unix configuration Makefile for Moscow ML          -*- mode: makefile -*-
 
 # Where to install stuff
 
-MOSMLHOME=${HOME}/mosml
+MOSMLHOME=${HOME}/.local/share/mosml/
 
 # Various utility programs
 INSTALL_PROGRAM=cp
@@ -12,7 +12,7 @@ PERL=perl
 
 BASELIBS=-lm
 
-# This works with most systems, but not MacOS X:
+# This works with most systems, including MacOS X with XCode installed:
 
 CC=gcc
 # CC=/usr/sepp/bin/gcc		# Solaris at KVL
@@ -29,8 +29,8 @@ ADDDYNLIBCFLAGS=
 
 # For Linux (x86 or Alpha), use:
 # ------------------------------
-CPP=/lib/cpp -P -traditional -Dunix -Umsdos
-STRIP=strip
+CPP=cpp -P -traditional -Dunix -Umsdos
+STRIP=strip -S
 LD=gcc -rdynamic
 DYNLD=ld -shared
 
@@ -44,11 +44,11 @@ DYNLD=ld -shared
 
 # For MacOS X, use:
 # -----------------
-# CPP=/usr/bin/cpp -P -traditional -Dunix -Umsdos
-# STRIP=strip -S
-# CC=cc -traditional-cpp
-# LD=cc
-# DYNLD=$(LD) -I/sw/include -bundle -flat_namespace -undefined suppress
+CPP=cpp -P -traditional -Dunix -Umsdos
+STRIP=strip -S
+#CC=gcc -traditional-cpp
+LD=gcc -rdynamic
+DYNLD=$(LD) -bundle -undefined dynamic_lookup
 # ADDDYNLIBCFLAGS=-I/sw/include -fPIC
 # ADDRUNCFLAGS=-I/sw/include
 # ADDRUNLIBS=-L/sw/lib -ldl

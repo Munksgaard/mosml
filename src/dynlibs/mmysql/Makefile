@@ -13,7 +13,7 @@ MYSQLINCDIR=/usr/include/mysql
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS= -Dunix -O2 $(OPTS) -I$(INCDIR) -I ${MYSQLINCDIR}
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) -I$(INCDIR) -I ${MYSQLINCDIR}
 
 MOSMLTOOLS=camlrunm $(MOSMLHOME)/tools
 MOSMLC=mosmlc -c

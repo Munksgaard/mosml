@@ -13,7 +13,7 @@ GDBMINCDIR=${HOME}/c/gdbm-1.7.3
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR) -I ${GDBMINCDIR}
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR)
 BASELIBS=-lm -ldl
 
 all: libmgdbm.so
@@ -25,7 +25,7 @@ mgdbm.o: mgdbm.c
 	$(CC) $(CFLAGS) -c -o mgdbm.o mgdbm.c 
 
 libmgdbm.so: mgdbm.o
-	$(DYNLD) -o libmgdbm.so mgdbm.o ${GDBMLIBDIR}/libgdbm.a
+	$(DYNLD) -o libmgdbm.so mgdbm.o -lgdbm
 
 test:
 	mosml -P full testgdbm.sml

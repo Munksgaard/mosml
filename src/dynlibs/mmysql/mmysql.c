@@ -2,6 +2,7 @@
    thomassi@dina.kvl.dk 1999-07-06  
    sestoft@dina.kvl.dk 1999-08-07, 2000-05-30, 2002-07-25 */
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #ifdef WIN32
@@ -60,8 +61,8 @@
 
 #define DBconn_val(x) ((MYSQL*)(Field(x, 0)))
 
-#define DBresult_val(x)      ((MYSQL_RES*)(Field(x, 1)))
-#define DBresultindex_val(x) ((MYSQL_ROW_OFFSET*)(Field(x, 2)))
+#define DBresult_val(x)      (Field(x, 1))
+#define DBresultindex_val(x) (Field(x, 2))
 
 value dbconn_alloc(MYSQL* conn)
 { 
@@ -72,8 +73,8 @@ value dbconn_alloc(MYSQL* conn)
 
 void dbresult_finalize(value dbresval)
 { 
-  MYSQL_RES* dbres = DBresult_val(dbresval);
-  MYSQL_ROW_OFFSET* index = DBresultindex_val(dbresval);
+  MYSQL_RES* dbres = (MYSQL_RES*)DBresult_val(dbresval);
+  MYSQL_ROW_OFFSET* index = (MYSQL_ROW_OFFSET*)DBresultindex_val(dbresval);
   if (dbres != NULL) {
     mysql_free_result(dbres);
     DBresult_val(dbresval) = NULL;
@@ -207,7 +208,7 @@ EXTERNML value db_status(value conn)
 /* ML type : dbresult_ -> int */
 EXTERNML value db_ntuples(value dbresval) 
 {
-  MYSQL_RES* dbres = DBresult_val(dbresval);
+  MYSQL_RES* dbres = (MYSQL_RES*)DBresult_val(dbresval);
   long ntuples;
   if (dbres == NULL)
     return Val_long(0);
@@ -227,7 +228,7 @@ EXTERNML value db_cmdtuples(value conn)
 /* ML type : dbresult_ -> int */
 EXTERNML value db_nfields(value dbresval) 
 {
-  MYSQL_RES* dbres = DBresult_val(dbresval);
+  MYSQL_RES* dbres = (MYSQL_RES*)DBresult_val(dbresval);
   if (dbres == NULL)
     return Val_long(0);
   /* NB: Cast from int to long int: */
@@ -253,7 +254,7 @@ void checkfbound(MYSQL_RES* dbres, int f, char* fcn)
 
 void checkbounds(value dbresval, value tupno, value fieldno, char* fcn) 
 {
-  MYSQL_RES* dbres = DBresult_val(dbresval);
+  MYSQL_RES* dbres = (MYSQL_RES*)DBresult_val(dbresval);
   int t = Long_val(tupno);
   int f = Long_val(fieldno);
   checkfbound(dbres, f, fcn);
@@ -270,8 +271,8 @@ void checkbounds(value dbresval, value tupno, value fieldno, char* fcn)
 EXTERNML value db_fname(value dbresval, value fieldno) 
 {
   MYSQL_FIELD *fields;
-  checkfbound(DBresult_val(dbresval), Long_val(fieldno), "db_fname");
-  fields=mysql_fetch_fields(DBresult_val(dbresval));
+  checkfbound((MYSQL_RES*)DBresult_val(dbresval), Long_val(fieldno), "db_fname");
+  fields=mysql_fetch_fields((MYSQL_RES*)DBresult_val(dbresval));
   return copy_string(fields[Long_val(fieldno)].name);
 }
 
@@ -279,7 +280,7 @@ EXTERNML value db_fname(value dbresval, value fieldno)
 EXTERNML value db_fnumber(value dbresval, value fieldnameval) 
 {
   char* fieldname = String_val(fieldnameval);
-  MYSQL_RES* dbres = DBresult_val(dbresval);
+  MYSQL_RES* dbres = (MYSQL_RES*)DBresult_val(dbresval);
   if (dbres == NULL) 
     return Val_long(-1);        /* No such field name */
   {
@@ -304,8 +305,8 @@ EXTERNML value db_ftype(value dbresval, value fieldno)
   //       numbers in Mysql.sml
 
   MYSQL_FIELD *fields;
-  checkfbound(DBresult_val(dbresval), Long_val(fieldno), "db_ftype");
-  fields=mysql_fetch_fields(DBresult_val(dbresval));
+  checkfbound((MYSQL_RES*)DBresult_val(dbresval), Long_val(fieldno), "db_ftype");
+  fields=mysql_fetch_fields((MYSQL_RES*)DBresult_val(dbresval));
 
   switch(fields[Long_val(fieldno)].type) {
   case FIELD_TYPE_DECIMAL:
@@ -369,9 +370,9 @@ EXTERNML value db_ftype(value dbresval, value fieldno)
 
 MYSQL_ROW seekandgetrow(value dbresval, int n) {
   /* mysql_row_seek seems to take time O(1), mysql_data_seek takes O(n) */
-  mysql_row_seek(DBresult_val(dbresval), 
-		 DBresultindex_val(dbresval)[n]);
-  return mysql_fetch_row(DBresult_val(dbresval));
+  mysql_row_seek((MYSQL_RES*)DBresult_val(dbresval), 
+		 ((MYSQL_ROW_OFFSET*)DBresultindex_val(dbresval))[n]);
+  return mysql_fetch_row((MYSQL_RES*)DBresult_val(dbresval));
 }
 
 /* ML type : dbresult_ -> int -> int -> int */

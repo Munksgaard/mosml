@@ -10,7 +10,7 @@ GDDIR=${HOME}/c/gd-1.7.3
 include ../../Makefile.inc
 
 OPTS=-fno-defer-pop
-CFLAGS=-Dunix -O2 $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR) -I ${GDDIR}
+CFLAGS=$(OPTCFLAGS) -Dunix $(OPTS) $(ADDDYNLIBCFLAGS) -I$(INCDIR)
 
 MOSMLTOOLS=camlrunm $(MOSMLHOME)/tools
 MOSMLC=mosmlc -c

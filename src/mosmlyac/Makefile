@@ -1,6 +1,6 @@
 # Unix Makefile for the parser generator.
 
-CFLAGS=-O -DNDEBUG
+CFLAGS=$(OPTCFLAGS) -DNDEBUG
 
 include ../Makefile.inc
 

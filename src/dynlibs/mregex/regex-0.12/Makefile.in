@@ -31,7 +31,7 @@ CPPFLAGS =
 include ../../../Makefile.inc
 
 # Likewise, you can override CFLAGS to optimize, use -Wall, etc.
-CFLAGS = -O2 $(ADDDYNLIBCFLAGS)
+CFLAGS=$(OPTCFLAGS) $(ADDDYNLIBCFLAGS)
 
 # Ditto for LDFLAGS and LOADLIBES.
 LDFLAGS =

@@ -26,10 +26,10 @@ test:
 	$(MAKE) -C munix test
 
 clean:
-	$(MAKE) -C msocket test
-	$(MAKE) -C mgd test
-	$(MAKE) -C mgdbm test
-	$(MAKE) -C mpq test
-	$(MAKE) -C mmysql test
-	$(MAKE) -C mregex test
-	$(MAKE) -C munix test
+	$(MAKE) -C msocket clean
+	$(MAKE) -C mgd clean
+	$(MAKE) -C mgdbm clean
+	$(MAKE) -C mpq clean
+	$(MAKE) -C mmysql clean
+	$(MAKE) -C mregex clean
+	$(MAKE) -C munix clean

@@ -45,11 +45,11 @@ DYNLD=ld -shared
 
 # For MacOS X, use:
 # -----------------
-CPP=cpp -P -traditional -Dunix -Umsdos
-STRIP=strip -S
+#CPP=cpp -P -traditional -Dunix -Umsdos
+#STRIP=strip -S
 #CC=gcc -traditional-cpp
-LD=gcc -rdynamic
-DYNLD=$(LD) -bundle -undefined dynamic_lookup
+#LD=gcc -rdynamic
+#DYNLD=$(LD) -bundle -undefined dynamic_lookup
 # ADDDYNLIBCFLAGS=-I/sw/include -fPIC
 # ADDRUNCFLAGS=-I/sw/include
 # ADDRUNLIBS=-L/sw/lib -ldl

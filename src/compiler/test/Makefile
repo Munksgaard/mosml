@@ -47,7 +47,7 @@ all:
 # with the current compiler
 current:
 	rm -f result
-	make all MOSML=../../camlrunm\ ../mosmltop\ -stdlib\ ../../mosmllib MOSMLC=../../camlrunm\ ../mosmlcmp\ -stdlib\ ../../mosmllib
+	$(MAKE) all MOSML=../../camlrunm\ ../mosmltop\ -stdlib\ ../../mosmllib MOSMLC=../../camlrunm\ ../mosmlcmp\ -stdlib\ ../../mosmllib
 
 clean:
 	rm -f result

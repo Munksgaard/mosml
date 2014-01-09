@@ -19,7 +19,7 @@ newtest: links
 
 # with the current compiler and the current library (as above)
 current: links
-	make newtest
+	$(MAKE) newtest
 
 cmdline: 
 	mosmlc -o cmdline cmdline.sml 
@@ -41,4 +41,4 @@ clean:
 	rm -f hardlinkA hardlinkB
 	rm -f testlink testcycl testbadl
 	rm -f testrun.ui testrun.uo
-	cd callback; make clean
+	cd callback; $(MAKE) clean

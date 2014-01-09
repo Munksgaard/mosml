@@ -155,13 +155,13 @@ depend: Filename.sml Config.sml Opcodes.sml Parser.sml Parser.sig Lexer.sml \
 
 regress:
 	echo "building current lib"
-	cd ../mosmllib; make -s current
+	cd ../mosmllib; $(MAKE) -s current
 	echo "testing current lib"
-	cd ../mosmllib/test; make -s current  || echo "results differ"
+	cd ../mosmllib/test; $(MAKE) -s current  || echo "results differ"
 	echo "testing current test"
-	cd ../test; make -s current || echo "results differ"
+	cd ../test; $(MAKE) -s current || echo "results differ"
 	echo "testing current compiler test"
-	cd test; make -s current || echo "results differ"
+	cd test; $(MAKE) -s current || echo "results differ"
 
 ### DO NOT DELETE THIS LINE
 Predef.uo: Const.uo 

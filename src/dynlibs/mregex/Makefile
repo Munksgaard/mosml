@@ -20,7 +20,7 @@ mregex.o: mregex.c
 	$(CC) $(CFLAGS) -c -o mregex.o mregex.c
 
 libmregex.so: mregex.o
-	(cd regex-0.12; ./configure; make regex.o)
+	(cd regex-0.12; ./configure; $(MAKE) regex.o)
 	$(DYNLD) -o libmregex.so regex-0.12/regex.o mregex.o 
 
 install:
@@ -33,7 +33,7 @@ clean:
 	rm -f *.o
 	rm -f *.so
 	rm -f Makefile.bak
-	(cd regex-0.12; (test -f Makefile && make clean || test 1))
+	(cd regex-0.12; (test -f Makefile && $(MAKE) clean || test 1))
 
 depend: 
 	rm -f Makefile.bak

@@ -30,7 +30,7 @@ clean:
 	rm -f test/*.uo
 	rm -f mosmlpm
 	rm -f Makefile.bak
-#	cd test; make clean
+#	cd test; $(MAKE) clean
 
 install:
 	${INSTALL_DATA} mosmlpm $(DESTDIR)$(LIBDIR)

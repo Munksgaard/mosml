@@ -29,8 +29,8 @@ all: Array.uo Array2.uo ArraySlice.uo Arraysort.uo \
 
 # Make with the current compiler
 current:
-	make clean
-	make all MOSMLC=../camlrunm\ ../compiler/mosmlcmp\ -stdlib\ .\ -P\ none
+	$(MAKE) clean
+	$(MAKE) all MOSMLC=../camlrunm\ ../compiler/mosmlcmp\ -stdlib\ .\ -P\ none
 
 clean:
 	rm -f *.ui

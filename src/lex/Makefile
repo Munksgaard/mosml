@@ -34,7 +34,7 @@ clean:
 	rm -f Grammar.output
 	rm -f Scanner.sml
 	rm -f Makefile.bak
-	cd test; make clean
+	cd test; $(MAKE) clean
 
 install:
 	${INSTALL_DATA} mosmllex $(DESTDIR)$(LIBDIR)
